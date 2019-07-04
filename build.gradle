@@ -1,0 +1,18 @@
+apply plugin: 'groovy'
+apply plugin: com.zoomint.NvdContainerDepCheckPlugin // the only thing that app developer needs to do
+
+// project specific dependency check configuration
+dependencyCheck {
+    format 'ALL'
+}
+
+dependencies {
+    // developer defined dependencies
+    compile 'commons-beanutils:commons-beanutils:1.9.1' // https://www.cvedetails.com/cve/CVE-2014-0114/
+}
+
+repositories {
+    mavenCentral()
+}
+
+

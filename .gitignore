@@ -1,0 +1,5 @@
+.idea/**
+.gradle/
+build/
+nvd-container-plugin.iml
+
