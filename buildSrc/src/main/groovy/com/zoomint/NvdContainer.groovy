@@ -19,7 +19,6 @@ import static com.github.dockerjava.api.model.HostConfig.newHostConfig
 class NvdContainer {
 	public static final NvdContainer INSTANCE = new NvdContainer()
 
-	private static final Logger logger = LoggerFactory.getLogger(NvdContainer.class)
 	public static final String NVD_CONTAINER_LABEL_KEY = "nvdContainer"
 	public static final String NVD_CONTAINER_SYNC_LOG = "Using NVD DB that was synchronized on"
 	public static final String DEPCHECK_DATABASE_NAME = "odc"
@@ -27,8 +26,9 @@ class NvdContainer {
 	public static final String IMAGE = "nvd-container-gradle:latest"
 	public static final int H2_DB_PORT = 9092
 
-	private DockerClient dockerClient
+	private static final Logger logger = LoggerFactory.getLogger(NvdContainer.class)
 
+	private DockerClient dockerClient
 
 	private NvdContainer() {
 		def config = DefaultDockerClientConfig.createDefaultConfigBuilder()
@@ -60,7 +60,6 @@ class NvdContainer {
 						.withPortBindings(portBindings))
 				.withLabels(labels)
 				.exec()
-
 
 		dockerClient.startContainerCmd(createResponse.getId()).exec()
 
@@ -98,7 +97,6 @@ class NvdContainer {
 			} catch (Exception ex) {
 				logger.debug('Exception thrown:', ex)
 				Thread.sleep(2000)
-
 			}
 			retries--
 		}
